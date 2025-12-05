@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Trò chơi Xé Túi Mù</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #f0f8ff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px;
+  }
+  h1 {
+    color: #ff4500;
+  }
+  .bags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+  .bag {
+    width: 100px;
+    height: 100px;
+    background: #ffa500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: transform 0.2s;
+  }
+  .bag:hover {
+    transform: scale(1.1);
+  }
+</style>
+</head>
+<body>
+<h1>Trò chơi Xé Túi Mù</h1>
+<div class="bags" id="bagsContainer">
+  <!-- Các túi sẽ được tạo bằng JS -->
+</div>
+<script>
+  const contents = [
+    "Chúc bạn may mắn lần sau",
+    "50K tiền",
+    "20K tiền",
+    "10K tiền",
+    "Quà tặng Tuần lộc Jollibee",
+    "Hát 1 bài bất kỳ",
+    "Làm người yêu trong 5 phút",
+    "Để ảnh avatar của người khác trong 1 ngày"
+  ];
+
+  const bagsContainer = document.getElementById("bagsContainer");
+
+  // Tạo túi
+  contents.forEach((_, index) => {
+    const bag = document.createElement("div");
+    bag.className = "bag";
+    bag.textContent = "Túi mù";
+    bag.addEventListener("click", () => {
+      // Lấy ngẫu nhiên 1 nội dung còn lại
+      const randomIndex = Math.floor(Math.random() * contents.length);
+      const item = contents.splice(randomIndex, 1)[0]; // loại bỏ sau khi mở
+      bag.textContent = item;
+      bag.style.background = "#32cd32"; // đổi màu sau khi mở
+      bag.style.cursor = "default";
+    });
+    bagsContainer.appendChild(bag);
+  });
+</script>
+</body>
+</html>
