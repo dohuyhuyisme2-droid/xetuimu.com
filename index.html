@@ -12,7 +12,7 @@
 
   const bagsContainer = document.getElementById("bagsContainer");
   let openedCount = 0; // Số túi đã mở
-  const maxOpen = 2; // Giới hạn 2 túi
+  const maxOpen = 2;   // Giới hạn 2 túi
 
   // Tạo túi
   contents.forEach(() => {
@@ -47,6 +47,16 @@
 
       bag.classList.add("flipped");
       openedCount++;
+
+      // Nếu đã mở 2 túi, làm mờ và vô hiệu hóa các túi còn lại
+      if (openedCount === maxOpen) {
+        document.querySelectorAll(".bag").forEach(b => {
+          if (!b.classList.contains("flipped")) {
+            b.style.opacity = "0.4";
+            b.style.pointerEvents = "none";
+          }
+        });
+      }
     });
 
     bagsContainer.appendChild(bag);
